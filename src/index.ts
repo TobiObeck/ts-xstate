@@ -1,7 +1,14 @@
-import { Machine } from 'xstate'
-import { TemplateMachine } from './ts/TemplateMachine'
-
 import './styles/index.scss'
+import { Machine, interpret } from 'xstate'
+import { templateMachine } from './ts/TemplateMachine'
 
-alert('asda')
+const service = interpret(templateMachine)
+    .onTransition(state => {
+        console.log(state.value)
+    })
+    .start();
+
+document.getElementById('openBtn').addEventListener('click', function () {
+    service.send('OPEN');
+});
 const app = document.getElementById('#root')

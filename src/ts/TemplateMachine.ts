@@ -1,27 +1,45 @@
-import { Machine } from 'xstate'
+import { Machine } from "xstate";
 
-export const TemplateMachine = Machine({
-  id: 'fetch',
-  initial: 'idle',
+interface TemplateSchema {
+  states: {
+    idle: {};
+    opened: {};
+    closed: {};
+  };
+}
+
+// The events that the machine handles
+type TemplateEvent = { type: "OPEN" } | { type: "CLOSE" };
+
+// The context (extended state) of the machine
+interface TemplateContext {
+  someContextVar: number;
+}
+
+export const templateMachine = Machine<TemplateContext, TemplateSchema, TemplateEvent>({
+  id: "Template",
+  initial: "idle",
   context: {
-    retries: 0
+    someContextVar: 0
   },
   states: {
     idle: {
       on: {
-        OPEN: 'opened'
+        OPEN: {
+          target: "opened",
+          actions: () => null
+        }
       }
     },
     opened: {
       on: {
-        CLOSE: 'closed'
+        CLOSE: "closed"
       }
     },
     closed: {
       on: {
-        OPEN: 'opened'
+        OPEN: "opened"
       }
     }
   }
 });
-

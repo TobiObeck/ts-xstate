@@ -16,3 +16,8 @@ html {
 p {
   font-size: $paragraph-font-size;
 }
+
+#modal {
+  margin: 30px;
+  display: none;
+}
