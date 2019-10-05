@@ -18,6 +18,9 @@ p {
 }
 
 #modal {
+  position: relative;
+  float: left;
   margin: 30px;
   display: none;
+  border: solid #cecece 1px;
 }

@@ -27,7 +27,7 @@ export const templateMachine = Machine<TemplateContext, TemplateSchema, Template
       on: {
         OPEN: {
           target: "opened",
-          actions: () => null
+          actions: () => (document.getElementById("modal").style.display = "block")
         }
       }
     },
